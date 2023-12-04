@@ -53,7 +53,7 @@ const Header = () => {
   const username = userInfo?.username;
 
   const logout = () => {
-    fetch("http://localhost:4000/logout", {
+    fetch("https://kenta-be.vercel.app/logout", {
       credentials: "include",
       method: "POST",
     });
