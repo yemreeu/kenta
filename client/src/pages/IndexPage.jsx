@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "../components/Post";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const IndexPage = () => {
   const [posts, setPosts] = useState([]);
