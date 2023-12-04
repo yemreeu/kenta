@@ -19,7 +19,7 @@ const secret = "asdljlkdasjadsjkdasdasdasdasdasda";
 app.use(
   cors({
     credentials: true,
-    origin: "https://blog-mern-client.vercel.app",
+    origin: "https://kentav2.vercel.app/",
   })
 );
 app.use(express.json());

@@ -11,7 +11,7 @@ const PostPage = () => {
   const { id } = useParams();
   useEffect(() => {
     setLoading(true);
-    fetch(`https://kenta-mern-api.vercel.app/post/${id}`)
+    fetch(`https://kenta-be.vercel.app/post/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setPostInfo(data);
@@ -64,7 +64,7 @@ const PostPage = () => {
               </div>
             )}
             <div className="image">
-              <img src={`https://kenta-mern-api.vercel.app/${postInfo.cover}`} alt="" />
+              <img src={`https://kenta-be.vercel.app/${postInfo.cover}`} alt="" />
             </div>
             <div
               className="content"

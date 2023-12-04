@@ -4,7 +4,7 @@ import Post from "../components/Post";
 const IndexPage = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    fetch("https://kenta-mern-api.vercel.app/post").then((response) => {
+    fetch("https://kenta-be.vercel.app/post").then((response) => {
       response.json().then((posts) => setPosts(posts));
     });
   }, []);
