@@ -8,7 +8,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://kenta-be.vercel.app/post")
+    fetch("https://kenta-api.vercel.app/post")
       .then((response) => response.json())
       .then((posts) => {
         setPosts(posts);
