@@ -34,25 +34,36 @@ const CreatePost = () => {
   const [redirect, setRedirect] = useState(false);
 
   const createNewPost = async (e) => {
+    e.preventDefault();
+
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.set('file',files[0]);
+    data.append("file", files[0]);
 
-    e.preventDefault();
+    console.log("Token:", yourAuthToken); // Log the token
+
     console.log(files);
-    const response  = await fetch("https://kenta-api.vercel.app/post", {
-      method: "POST",
-      body: data,
-      credentials: 'include',
-    });
-    if(response.ok){
-      setRedirect(true);
+    try {
+      const response = await fetch("https://kenta-api.vercel.app/post", {
+        method: "POST",
+        body: data,
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${userInfo.authToken}`, // include the token
+        },
+      });
+
+      if (response.ok) {
+        setRedirect(true);
+      }
+    } catch (error) {
+      console.error("Error creating post:", error);
     }
   };
-  if(redirect){
-     return <Navigate to={"/"} />
+  if (redirect) {
+    return <Navigate to={"/"} />;
   }
   return (
     <form onSubmit={createNewPost}>
@@ -68,11 +79,7 @@ const CreatePost = () => {
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
       />
-      <input
-        type="file"
-        
-        onChange={(e) => setFiles(e.target.files)}
-      />
+      <input type="file" onChange={(e) => setFiles(e.target.files)} />
       <ReactQuill
         modules={modules}
         formats={formats}
