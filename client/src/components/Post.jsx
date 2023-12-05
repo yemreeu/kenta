@@ -20,7 +20,7 @@ const Post = ({ _id,content, cover, summary, title, createdAt, author }) => {
       <div className="image">
         <Link to={`/post/${_id}`}>
           {" "}
-          <img src={"https://kenta-api.vercel.app/post/" + cover} alt=""></img>
+          <img src={"https://kenta-api.vercel.app/" + cover} alt=""></img>
         </Link>
       </div>
       <div className="texts">
