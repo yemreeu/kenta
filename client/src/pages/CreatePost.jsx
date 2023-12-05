@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext,useState } from "react";
 import { Navigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { UserContext } from "../context/UserContext";
+
 const modules = {
   toolbar: [
     [{ header: [1, 2, false] }],
@@ -32,6 +34,7 @@ const CreatePost = () => {
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const { userInfo } = useContext(UserContext);
 
   const createNewPost = async (e) => {
     e.preventDefault();
@@ -42,6 +45,9 @@ const CreatePost = () => {
     data.set("content", content);
     data.append("file", files[0]);
 
+    console.log("Token:", authToken); // Log the token
+
+    console.log(files);
     try {
       const response = await fetch("https://kenta-api.vercel.app/post", {
         method: "POST",
