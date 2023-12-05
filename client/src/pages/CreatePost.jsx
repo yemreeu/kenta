@@ -1,9 +1,7 @@
-import React, { useContext,useState } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { UserContext } from "../context/UserContext";
-
 const modules = {
   toolbar: [
     [{ header: [1, 2, false] }],
@@ -34,39 +32,27 @@ const CreatePost = () => {
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const { userInfo } = useContext(UserContext);
 
   const createNewPost = async (e) => {
-    e.preventDefault();
-
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
-    data.append("file", files[0]);
+    data.set('file',files[0]);
 
-    console.log("Token:", authToken); // Log the token
-
+    e.preventDefault();
     console.log(files);
-    try {
-      const response = await fetch("https://kenta-api.vercel.app/post", {
-        method: "POST",
-        body: data,
-        credentials: "include",
-        headers: {
-          Authorization: `Bearer ${userInfo.authToken}`, // include the token
-        },
-      });
-
-      if (response.ok) {
-        setRedirect(true);
-      }
-    } catch (error) {
-      console.error("Error creating post:", error);
+    const response  = await fetch("https://kenta-api.vercel.app/post", {
+      method: "POST",
+      body: data,
+      credentials: 'include',
+    });
+    if(response.ok){
+      setRedirect(true);
     }
   };
-  if (redirect) {
-    return <Navigate to={"/"} />;
+  if(redirect){
+     return <Navigate to={"/"} />
   }
   return (
     <form onSubmit={createNewPost}>
@@ -82,7 +68,11 @@ const CreatePost = () => {
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
       />
-      <input type="file" onChange={(e) => setFiles(e.target.files)} />
+      <input
+        type="file"
+        
+        onChange={(e) => setFiles(e.target.files)}
+      />
       <ReactQuill
         modules={modules}
         formats={formats}
