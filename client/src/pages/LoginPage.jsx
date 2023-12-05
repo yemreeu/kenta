@@ -7,7 +7,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const {setUserInfo} = useContext(UserContext);
+  const { setUserInfo } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,10 +19,19 @@ const LoginPage = () => {
       credentials: "include",
     });
     if (response.ok) {
-      response.json().then((userInfo) => {
-        setUserInfo(userInfo);
-        setRedirect(true);
-      });
+      const userInfo = await response.json();
+
+      // Assuming your server returns a token in the response
+      const authToken = userInfo.token;
+
+      // Store the token securely (here, using localStorage for simplicity)
+      localStorage.setItem("authToken", authToken);
+
+      // Update the user context with user information
+      setUserInfo(userInfo);
+
+      // Redirect the user to the home page
+      setRedirect(true);
     } else {
       alert("Login failed, wrong credentials");
     }
