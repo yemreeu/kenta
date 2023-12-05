@@ -35,7 +35,7 @@ const Header = () => {
     setIsResponsive(false); // Navbar'ı kapatmak için state'i false yap
   };
   useEffect(() => {
-    fetch("http://localhost:4000/profile", {
+    fetch("https://kenta-be.vercel.app/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
