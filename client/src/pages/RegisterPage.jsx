@@ -7,7 +7,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("https://kenta-be.vercel.app/register", {
+    const response = await fetch("https://kenta-api.vercel.app/register", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
