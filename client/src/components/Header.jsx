@@ -35,7 +35,7 @@ const Header = () => {
     setIsResponsive(false); // Navbar'ı kapatmak için state'i false yap
   };
   useEffect(() => {
-    fetch("https://kenta-be.vercel.app/profile", {
+    fetch("https://kenta-api.vercel.app/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
@@ -53,7 +53,7 @@ const Header = () => {
   const username = userInfo?.username;
 
   const logout = () => {
-    fetch("https://kenta-be.vercel.app/logout", {
+    fetch("https://kenta-api.vercel.app/logout", {
       credentials: "include",
       method: "POST",
     });
