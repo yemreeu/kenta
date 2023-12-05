@@ -42,9 +42,6 @@ const CreatePost = () => {
     data.set("content", content);
     data.append("file", files[0]);
 
-    console.log("Token:", yourAuthToken); // Log the token
-
-    console.log(files);
     try {
       const response = await fetch("https://kenta-api.vercel.app/post", {
         method: "POST",
